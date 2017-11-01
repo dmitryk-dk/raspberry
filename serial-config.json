@@ -1,0 +1,4 @@
+{
+  "arduino_serial_name": "/dev/cu.usbmodem1421",
+  "arduino_serial_baud": 9600
+}

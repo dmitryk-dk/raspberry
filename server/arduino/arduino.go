@@ -5,8 +5,8 @@ import (
 )
 
 const (
-	ArduinoSerialName = "/dev/cu.usbmodem1421"
-	ArduinoBaud       = 9600
+	//ArduinoSerialName = "/dev/cu.usbmodem1421"
+	//ArduinoBaud       = 9600
 )
 
 type Arduino struct {
@@ -14,12 +14,12 @@ type Arduino struct {
 	Bytes int
 }
 
-func (a *Arduino) Connect() error {
+func (a *Arduino) Connect(arduinoSerial string, arduinoBaud int) error {
 	var err error
 
 	c := &serial.Config{
-		Name: ArduinoSerialName,
-		Baud: ArduinoBaud,
+		Name: arduinoSerial,
+		Baud: arduinoBaud,
 	}
 
 	a.Port, err = serial.OpenPort(c)

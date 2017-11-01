@@ -76,4 +76,5 @@ node_modules
 vendor
 build
 raspberry
+serial-config.json
 

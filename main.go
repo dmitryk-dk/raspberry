@@ -1,8 +1,8 @@
 package main
 
 import (
-	"log"
 	"fmt"
+	"log"
 
 	"encoding/json"
 	"net/http"
@@ -11,9 +11,10 @@ import (
 	"syscall"
 
 	"strings"
-	"time"
 
 	"github.com/dmitryk-dk/raspberry/server/arduino"
+	"github.com/dmitryk-dk/raspberry/server/config"
+	"time"
 )
 
 const (
@@ -26,6 +27,8 @@ type Weather struct {
 	Humidity    string `json:"humidity"`
 }
 
+var cfg *config.Config
+
 func dependenciesHandler() http.Handler {
 	return http.StripPrefix("/", http.FileServer(http.Dir(staticDir)))
 }
@@ -33,7 +36,7 @@ func dependenciesHandler() http.Handler {
 func main() {
 	// get static files
 	depHandler := dependenciesHandler()
-
+	cfg = config.GetConfig()
 	// handle static files
 	http.Handle("/", depHandler)
 
@@ -59,19 +62,21 @@ func getData(w http.ResponseWriter, r *http.Request) {
 	ard := new(arduino.Arduino)
 	if r.Method == "GET" {
 
-		if err := ard.Connect(); err != nil {
-			log.Fatalf("can't connect to Arduino: %s: %s", arduino.ArduinoSerialName, err)
+		if err := ard.Connect(cfg.ArduinoSerialName, cfg.ArduinoSerialBaud); err != nil {
+			log.Fatalf("can't connect to Arduino: %s: %s", cfg.ArduinoSerialName, err)
 		}
 
 		n, err := ard.SendCommand()
 		if err != nil {
-			log.Fatalf("has problem when sending command to arduino: %s: %s", arduino.ArduinoSerialName, err)
+			log.Fatalf("has problem when sending command to arduino: %s: %s", cfg.ArduinoSerialName, err)
 		}
-		time.Sleep(1 * time.Second)
+
+		time.Sleep(1000 * time.Millisecond)
+
 		if n > 0 {
 			_, buf, err := ard.GetData()
 			if err != nil {
-				log.Fatalf("can't get data from arduino: %s: %s", arduino.ArduinoSerialName, err)
+				log.Fatalf("can't get data from arduino: %s: %s", cfg.ArduinoSerialName, err)
 			}
 
 			weather := Weather{
