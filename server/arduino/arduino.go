@@ -4,11 +4,6 @@ import (
 	"github.com/tarm/serial"
 )
 
-const (
-	//ArduinoSerialName = "/dev/cu.usbmodem1421"
-	//ArduinoBaud       = 9600
-)
-
 type Arduino struct {
 	Port  *serial.Port
 	Bytes int
