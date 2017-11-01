@@ -1,4 +1,4 @@
-FROM golang:1.9-alpine
+FROM mcuadros/golang-arm
 
 ENV GOPATH="/home/app"
 ENV PATH=$PATH:$GOPATH/bin
