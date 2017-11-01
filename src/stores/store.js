@@ -10,7 +10,7 @@ class AppStore extends ReduceStore {
     getInitialState () {
         return {
             errors: null,
-            wheather: {},
+            weather: {},
         };
     }
 
@@ -19,25 +19,8 @@ class AppStore extends ReduceStore {
             case actionTypes.APP_INIT:
                 return {
                     ...state,
-                    wheather: action.data
+                    weather: action.data
                 };
-
-            // case actionTypes.PHONE_SAVE_SUCCESS:
-            //     return {
-            //         ...state,
-            //         phones: [
-            //             ...state.phones,
-            //             action.phone
-            //         ]
-            //     };
-            //
-            // case actionTypes.PHONE_DELETE_SUCCESS:
-            //     return {
-            //         ...state,
-            //         phones: [
-            //             ...state.phones.filter(phone => phone.number !== action.phone.number)
-            //         ]
-            //     };
 
             default:
                 return state;

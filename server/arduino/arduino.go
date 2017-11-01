@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	ArduinoSerialName = "/dev/ttyACM0"
+	ArduinoSerialName = "/dev/cu.usbmodem1421"
 	ArduinoBaud       = 9600
 )
 

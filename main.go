@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"fmt"
 
 	"encoding/json"
 	"net/http"
@@ -23,7 +23,7 @@ const (
 
 type Weather struct {
 	Temperature string `json:"temperature"`
-	Humadity    string `json:"humadity"`
+	Humidity    string `json:"humidity"`
 }
 
 func dependenciesHandler() http.Handler {
@@ -76,7 +76,7 @@ func getData(w http.ResponseWriter, r *http.Request) {
 
 			weather := Weather{
 				Temperature: string(buf[:5]) + " *C",
-				Humadity:    strings.TrimSuffix(string(buf[6:12]), "\r") + " %",
+				Humidity:    strings.TrimSuffix(string(buf[6:12]), "\r") + " %",
 			}
 
 			jsonData, err := json.Marshal(weather)

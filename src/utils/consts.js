@@ -3,5 +3,5 @@
 // export const delPhone = 'delete';
 export const getTemperature = 'temperature';
 export const getHostFn = () => {
-    return "http://172.16.30.162:3000/{API}"
+    return window.location.protocol+"//"+window.location.host+"/{API}"
 };

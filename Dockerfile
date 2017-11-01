@@ -1,4 +1,4 @@
-FROM mcuadros/golang-arm
+FROM resin/raspberry-pi-golang
 
 ENV GOPATH="/home/app"
 ENV PATH=$PATH:$GOPATH/bin
