@@ -12,9 +12,10 @@ import (
 
 	"strings"
 
+	"time"
+
 	"github.com/dmitryk-dk/raspberry/server/arduino"
 	"github.com/dmitryk-dk/raspberry/server/config"
-	"time"
 )
 
 const (
